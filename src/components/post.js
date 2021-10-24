@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React, {useState, useEffect} from "react";
 import ls from "local-storage";
 import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
@@ -7,24 +7,31 @@ import { faArrowAltCircleUp } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
 const Post = ({ id }) => {
-  let posts = ls.get("posts")
-  let userEmail = ls.get("user")
+  let posts = ls.get("posts");
+  let userEmail = ls.get("user");
   const [upvoted, setUpvoted] = useState(userEmail && userEmail in posts[id]["voted"]);
+
+  // useEffect(() => {
+  //   postsAll = ls.get("posts")
+  //   userEmail = ls.get("user")
+  // });
 
   const upvote = function(event) {
       event.preventDefault();
-      if (userEmail) {
-        if (userEmail in posts[id]["voted"]) {
-          posts[id].upvotes--;
-          delete posts[id].voted[userEmail]
-          ls.set("posts", posts);
+      let postsAll = ls.get("posts")
+      let user = ls.get("user")
+      if (user) {
+        if (user in postsAll[id]["voted"]) {
+          postsAll[id].upvotes--;
+          delete postsAll[id].voted[user]
+          ls.set("posts", postsAll);
           setUpvoted(false)
         } else {
-          posts[id].upvotes++;
-          posts[id].voted[userEmail] = 1
-          ls.set("posts", posts);
+          postsAll[id].upvotes++;
+          postsAll[id].voted[user] = 1
+          ls.set("posts", postsAll);
           setUpvoted(true)
-          document.getElementById("upvotebutton-"+id).textContent = posts[id].upvotes;
+          document.getElementById("upvotebutton-"+id).textContent = postsAll[id].upvotes;
         }
       }
   }

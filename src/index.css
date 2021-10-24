@@ -244,3 +244,18 @@ Button.upvote {
 Button.green {
   background-color: rgb(225, 255, 225);
 }
+
+input.sb {
+  display: inline-block;
+  width: 90%;
+  height: 30px;
+}
+
+button.search {
+  display: inline-block;
+  height: 30px;
+  width: 60px;
+  font-size: 15px;
+  background-color: rgb(255, 234, 118);
+  margin-left: 10px;
+}

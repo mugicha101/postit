@@ -5,7 +5,7 @@ const Header = () => (
   <header className="masthead">
     <div>
       <div>
-        <Link to="/">
+        <Link to={{pathname: "/", state: {searchQuery: ""}}}>
           <h2 className="text-center">PostIt</h2>
         </Link>
       </div>
